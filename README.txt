@@ -1,4 +1,3 @@
-# VisualizingChaos
 Final Project for Physics 5810 - Computational Physics
 
 Visualizing Chaos with C++, Gnuplot, and PyGame
