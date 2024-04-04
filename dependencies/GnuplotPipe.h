@@ -3,10 +3,12 @@
 //  Header file for the GnuplotPipe C++ class.
 //
 //  Programmer:  Dick Furnstahl  furnstahl.1@osu.edu
+//               Connor Fricke   fricke.59@osu.edu
 //
 //  Revision history:
 //      02/06/06  original version, based on gnuplot_pipe 
 //      02/07/09  minor upgrades
+//      04/03/24  added set_terminal() function
 //
 //*****************************************************************
 #ifndef GNUPLOTPIPE_H
@@ -27,6 +29,7 @@ class GnuplotPipe
   // accessor functions --- these set private variables
   void set_filename (const string &t_filename) {filename = t_filename;};
   void set_filename2 (const string &t_filename2) {filename2 = t_filename2;};
+  void set_terminal(const string&t_terminal) {terminal = t_terminal;};
   void set_title (const string &t_title) {title = t_title;};
   void set_xlabel (const string &t_xlabel) {xlabel = t_xlabel;};
   void set_ylabel (const string &t_ylabel) {ylabel = t_ylabel;};
@@ -51,6 +54,7 @@ class GnuplotPipe
   string filename;      // file name for temporary output file 1
   FILE *fileout2;       // file handle for temporary output file 2
   string filename2;  // file name for temporary output file 2
+  string terminal;
   string title;      // overall plot title
   string xlabel;     // x-axis label
   string ylabel;     // y-axis label  

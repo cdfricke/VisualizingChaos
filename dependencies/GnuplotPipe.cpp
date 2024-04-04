@@ -42,8 +42,8 @@ GnuplotPipe::GnuplotPipe ( )
   gp_cmd = 0;
   fileout = 0;
   fileout2 = 0;
-  filename = "gnupipe1.dat";
-  filename2 = "gnupipe2.dat";
+  filename = "datafiles/gnupipe1.dat";
+  filename2 = "datafiles/gnupipe2.dat";
   
   // Set titles to blanks
   title = " ";
@@ -86,6 +86,8 @@ GnuplotPipe::init ( )
   
   fileout = fopen (filename.c_str(), "w");
   fileout2 = fopen (filename2.c_str(), "w");
+
+  gnuplot_cmd ("set terminal " + terminal);
 
   gnuplot_cmd ("set timestamp");
 
