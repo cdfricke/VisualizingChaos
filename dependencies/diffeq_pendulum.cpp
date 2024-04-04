@@ -13,7 +13,7 @@
 //                 switched to <cmath>
 //      02/05/06  switched to GnuplotPipe class
 //      04/03/24  Connor Fricke: minor changes for adaptation to VisualizingChaos Project,
-//                cleaned up main(), cleaned up IO formatting
+//                cleaned up main(), cleaned up IO formatting, created structs and modified existing ones.
 //  Notes:
 //   * Based on the discussion of differential equations in Chap. 9
 //      of "Computational Physics" by Landau and Paez and of
@@ -68,7 +68,7 @@ void queryParameters(pendulum_parameters &pendParams, plot_parameters &plotParam
 //*************************** main program ***************************
 int main(void)
 {
-  const string FILENAME = "misc\\diffeq_pendulum.dat"; // filename for the output file
+  const string FILENAME = "datafiles\\diffeq_pendulum.dat"; // filename for the output file
   GnuplotPipe myPipe;
 
   const int N = 2; // 2nd order equation --> 2 coupled 1st
@@ -153,7 +153,7 @@ repeat:
   out.close(); // close the output file
   cout << "\n results added to diffeq_pendulum.dat\n\n";
 }
-  // prompt the user to avoid the window closing immediately
+  // allow the user to run the program again if they choose
   char AGAIN;
   cout << "Again? Y/N\n>> ";
   cin >> AGAIN;
@@ -222,6 +222,7 @@ void queryParameters(pendulum_parameters &pendParams, plot_parameters &plotParam
   int answer = 1;     // answer to parameter queries
   while (answer != 0) // iterate until told to move on
   {
+    // used to clear the screen each time the menu is displayed for an easier console program experience.
     system("cls");
     cout << "\nCurrent parameters:\n";
     cout << "[1] omega0 = " << pendParams.omega0 << endl;
