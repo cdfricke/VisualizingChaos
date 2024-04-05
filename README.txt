@@ -51,9 +51,8 @@ TODO:
     diffeq_pendulum.exe w_ext 0.5 f_ext 0.9 theta0 -0.8
  - create files for input redirection purposes to the C++ program, with descriptive names (behavior of the pendulum).
  - Add textbox class to python script so that large amounts of text can be rendered more easily.
+ - Add text to simulation that displays the pendulum parameters
  - Add descriptive name of pendulum behavior somewhere in the simulation, e.g. ("Chaotic Pendulum")
- - Add some pregenerated data files that won't be overwritten, and allow the user to select the datafile they want to
-   simulate.
 
 
 

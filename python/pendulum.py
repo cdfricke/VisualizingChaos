@@ -1,9 +1,9 @@
 # Programmer: Connor Fricke (fricke.59@osu.edu)
 # File: pendulum.py
-# Latest Revision: 4-April-2024 --> Created
+# Latest Revision: 5-APRIL-2024 --> Created for Physics 5810 with Prof. Ralf Bundschuh
 # PyGame simulation of damped, driven pendulum behavior, with positions updated from
 # C++ differential equation solver, diffeq_pendulum.cpp, written by Prof. Furnstahl and
-# adapted for use within this project
+# adapted for use within this project by myself 
 
 # *** NECESSARY MODULES ***
 import pygame
@@ -16,9 +16,21 @@ from pandas import read_csv
 import os
 # *************************
 
-# *** GET PATHS ***
+# *** GET PATHS, CHOOSE FILE ***
 PROJ_DIR = os.getcwd()
 DATA_PATH = PROJ_DIR + "\\datafiles\\"
+selectFile = input("Select simulation to run:\n[1] Most Recent\n[2] Chaotic Example\n[3] Limit Cycles Example\n>> ")
+selectFile = int(selectFile) # convert to int
+match (selectFile):
+    case 1:
+        DATA_FILE = "diffeq_pendulum.dat"
+    case 2:
+        DATA_FILE = "chaotic.dat"
+    case 3:
+        DATA_FILE = "limit_cycle.dat"
+    case _:
+        print("Using most recent C++ output.")
+        DATA_FILE = "diffeq_pendulum.dat"
 # *****************
 
 # *** INITIALIZE ***
@@ -89,7 +101,7 @@ motor_text = Text()
 
 # *** PARSE DATA FROM C++ ***
 colnames = ["t", "theta", "thetadot"]
-dataframe = read_csv(DATA_PATH + "diffeq_pendulum.dat", comment="#", sep=" ", names=colnames)
+dataframe = read_csv(DATA_PATH + DATA_FILE, comment="#", sep=" ", names=colnames)
 print(dataframe)
 # ***************************
 

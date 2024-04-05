@@ -1,14 +1,12 @@
-# File: arrow.py
 # Programmer: Connor Fricke (cd.fricke23@gmail.com)
-# Last Revision:
-#   17-MAR-2024 --> Created, v1
+# File: arrow.py
+# Last Revision: 17-MAR-2024 --> Created for orbit simulation
+#
+# *************************************************
 
 import pygame
 
-# *** CLASS DEFINITIONS ***
-# NOTE THAT THESE CLASS DEFINITIONS RELY ON SOME OF THE DEFINED VARIABLES ABOVE
-
-# ARROW : class object for drawing arrows between positions on the screen.
+# CLASS FOR DRAWING ARROWS BETWEEN SCREEN LOCATIONS IN PYGAME
 class Arrow:
     
     def __init__(self, tail, tip):

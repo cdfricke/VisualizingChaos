@@ -12,8 +12,10 @@
 //      01/30/06  put declarations and initializations together;
 //                 switched to <cmath>
 //      02/05/06  switched to GnuplotPipe class
-//      04/03/24  Connor Fricke: minor changes for adaptation to VisualizingChaos Project,
-//                cleaned up main(), cleaned up IO formatting, created structs and modified existing ones.
+//      04/03/24  adapted to VisualizingChaos Project for Physics 5810 Final Project.
+//                Cleaned up main(), restructured IO, added plot_params struct and 
+//                queryParameters() function.
+//      04/05/24  Attempted to include both Bash + Pwsh functionality
 //  Notes:
 //   * Based on the discussion of differential equations in Chap. 9
 //      of "Computational Physics" by Landau and Paez and of
@@ -21,7 +23,6 @@
 //   * Uses the fourth-order Runge-Kutta ode routine (equal step)
 //   * Angular position is theta(t) and angular velocity is theta_dot(t)
 //   * We've added _ext to the driving force (for "external")
-//   * Current version adapted for Windows
 //
 //******************************************************************
 // include files
@@ -37,9 +38,9 @@ using namespace std; // we need this when .h is omitted
 #include "GnuplotPipe.h"     // direct piping
 
 // STRINGS FOR THINGS
-string OS;
-string CLEAR_CMD;
-string GNUPLOT_TERMINAL;
+string OS;    
+string CLEAR_CMD;         // derived from OS
+string GNUPLOT_TERMINAL;  // derived from OS
 
 // ************************** structures ***************************
 // DEFAULT PARAMETERS FOR PENDULUM
@@ -89,7 +90,11 @@ int main(void)
     CLEAR_CMD = "clear";
   }
   else
+  {
+    // might work, might not, shouldn't get to this case usually
     GNUPLOT_TERMINAL = "qt";
+    CLEAR_CMD = "clear";
+  }
 
   // *** INITIALIZE ***
   const string FILENAME = "datafiles\\diffeq_pendulum.dat"; // filename for the output file
@@ -106,6 +111,7 @@ int main(void)
 // START OF MENU FUNCTIONALITY
 repeat:
 {
+  // this function handles the menu prompting and assigning values entered by the user
   queryParameters(pendParams, plotParams, h);
 
   rhs_params_ptr = &pendParams; // load void pointer for rhs()

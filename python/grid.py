@@ -1,9 +1,6 @@
-# File: grid.py
 # Programmer: Connor Fricke (cd.fricke23@gmail.com)
-# Last Revision:
-#   4-MAR-2024 --> Created, v1
-#   7-MAR-2024 --> added grid colors
-#   17-MAR-2024 --> added comments for documentation
+# File: grid.py
+# Last Revision: 17-MARCH-2024 --> minor fixes
 #
 # ************************************************
 
@@ -12,7 +9,7 @@ import random
 
 # *** CLASS DEFINITION ***
 
-# GRID: class object for drawing a grid with a certain number of rows and columns on the screen.
+# CLASS FOR DRAWING SQUARE/RECTANGLE GRIDS IN PYGAME
 class Grid:
     
     def __init__(self, rows, columns, width, height):
