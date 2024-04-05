@@ -26,7 +26,8 @@ class Trail:
     # *************
     # This function draws an anti-aliased line between each of the points in the pointArray stored by the class.
     def aadraw(self, surface, color, blend):
-        pygame.draw.aalines(surface=surface, color=color, closed=False, points=self.pointArray, blend=blend)
+        if (len(self.pointArray) > 1):
+            pygame.draw.aalines(surface=surface, color=color, closed=False, points=self.pointArray, blend=blend)
     
     # Trail.draw(surface, color, width):
     # parameters:
@@ -36,7 +37,8 @@ class Trail:
     # *************
     # This function draws a line between each of the points in the pointArray stored by the class.
     def draw(self, surface, color, width):
-        pygame.draw.lines(surface=surface, color=color, closed=False, points=self.pointArray, width=width)
+        if (len(self.pointArray) > 1):
+            pygame.draw.lines(surface=surface, color=color, closed=False, points=self.pointArray, width=width)
 
     # Trail.addPoint(point):
     # parameters:
