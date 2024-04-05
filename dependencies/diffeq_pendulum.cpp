@@ -21,6 +21,7 @@
 //   * Uses the fourth-order Runge-Kutta ode routine (equal step)
 //   * Angular position is theta(t) and angular velocity is theta_dot(t)
 //   * We've added _ext to the driving force (for "external")
+//   * Current version adapted for Windows
 //
 //******************************************************************
 // include files
@@ -35,7 +36,12 @@ using namespace std; // we need this when .h is omitted
 #include "diffeq_routines.h" // diffeq routine prototypes
 #include "GnuplotPipe.h"     // direct piping
 
-// *** STRUCTURES ***
+// STRINGS FOR THINGS
+string OS;
+string CLEAR_CMD;
+string GNUPLOT_TERMINAL;
+
+// ************************** structures ***************************
 // DEFAULT PARAMETERS FOR PENDULUM
 struct pendulum_parameters
 {
@@ -61,33 +67,52 @@ struct plot_parameters
   int plot_delay = 10;    // wait plot_delay msec between points
 };
 
-// *** FUNCTION PROTOTYPES ***
+// ************************** func prototypes ***************************
 double rhs(double t, double y[], int i, void *params_ptr);
 void queryParameters(pendulum_parameters &pendParams, plot_parameters &plotParams, double &h);
 
-//*************************** main program ***************************
+// ************************** main program ***************************
 int main(void)
 {
+  // *** OS NEEDED FOR SOME FEATURES TO WORK ***
+  cout << "Enter OS (windows / linux):\n>> ";
+  cin >> OS;
+
+  if (OS == "Windows" or OS == "windows")
+  {
+    GNUPLOT_TERMINAL = "windows";
+    CLEAR_CMD = "cls";
+  }
+  else if (OS == "Linux" or OS == "linux")
+  {
+    GNUPLOT_TERMINAL = "x11";
+    CLEAR_CMD = "clear";
+  }
+  else
+    GNUPLOT_TERMINAL = "qt";
+
+  // *** INITIALIZE ***
   const string FILENAME = "datafiles\\diffeq_pendulum.dat"; // filename for the output file
   GnuplotPipe myPipe;
 
   const int N = 2; // 2nd order equation --> 2 coupled 1st
   double y_rk4[N]; // vector of y functions
 
-  // *** ASSIGN ALL PARAMETERS ***
-  void *rhs_params_ptr;           // void pointer passed to functions
+  void *rhs_params_ptr;           // void pointer for rhs()
   pendulum_parameters pendParams; // parameters for the pendulum behavior
-  plot_parameters plotParams;
-  double h; // extraneous parameters that cannot belong to either structure
+  plot_parameters plotParams;     // parameters for Gnuplot behavior
+  double h;                       // parameter for diffeq routine
 
-// replaced while loop with goto statement for readability
+// START OF MENU FUNCTIONALITY
 repeat:
 {
   queryParameters(pendParams, plotParams, h);
 
+  rhs_params_ptr = &pendParams; // load void pointer for rhs()
+
   // *** PLOTTING STAGE ***
   // set some properties of the Gnuplot Pipe
-  myPipe.set_terminal("windows title 'Gnuplot: Visualizing Chaos' size 720,720");
+  myPipe.set_terminal(GNUPLOT_TERMINAL + " title 'Gnuplot: Visualizing Chaos' size 720,720");
   myPipe.set_title("Pendulum Phase Space");
   myPipe.set_xlabel("theta");
   myPipe.set_ylabel("theta dot");
@@ -97,9 +122,6 @@ repeat:
   // open the output file
   ofstream out; // declare the output file
   out.open(FILENAME, ofstream::trunc);
-
-  // load force parameters into void pointer
-  rhs_params_ptr = &pendParams; // structure to pass to function
 
   myPipe.init(); // start up piping to gnuplot
 
@@ -222,8 +244,8 @@ void queryParameters(pendulum_parameters &pendParams, plot_parameters &plotParam
   int answer = 1;     // answer to parameter queries
   while (answer != 0) // iterate until told to move on
   {
-    // used to clear the screen each time the menu is displayed for an easier console program experience.
-    system("cls");
+    system(CLEAR_CMD.c_str());  // clear terminal before showing menu
+    // MENU OPTIONS:
     cout << "\nCurrent parameters:\n";
     cout << "[1] omega0 = " << pendParams.omega0 << endl;
     cout << "[2] alpha = " << pendParams.alpha << endl;

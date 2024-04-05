@@ -29,11 +29,6 @@ g++ -c -g -Wall -O1 -o $dir\misc\GnuplotPipe.o $dir\dependencies\GnuplotPipe.cpp
 g++ -o diffeq_pendulum.exe $dir\misc\diffeq_pendulum.o $dir\misc\diffeq_routines.o $dir\misc\GnuplotPipe.o
 Write-Output "Compiling Stage Complete."
 
-# install Python modules, dump output to misc\null
-#Write-Output "Installing Python Modules: PyGame, Matplotlib"
-#python.exe -m pip install PyGame Matplotlib > $dir\misc\null
-#Write-Output "Module Install Stage Complete."
-
 # run C++ program
 $userInput = Read-Host -Prompt "Start C++ Program? Y/N"
 if ($userInput -eq "Y")
@@ -43,6 +38,11 @@ if ($userInput -eq "Y")
 else {
     Write-Host "Process terminated."
 }
+
+# install Python modules, dump output to misc\null
+#Write-Output "Installing Python Modules: PyGame, Matplotlib"
+#python.exe -m pip install PyGame Matplotlib > $dir\misc\null
+#Write-Output "Module Install Stage Complete."
 
 
 

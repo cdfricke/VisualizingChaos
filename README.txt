@@ -3,7 +3,7 @@ Final Project for Physics 5810 - Computational Physics
 Visualizing Chaos with C++, Gnuplot, and PyGame
 C. Fricke (fricke.59@osu.edu)
 
-Latest Revision: 3-April-2024
+Latest Revision: 5-April-2024
 
 The final project will use some previously learned methods of solving dfferential equations in C++ to 
 solve the damped, driven pendulum oscillator differential equation. Then, the project will use PyGame 
@@ -18,23 +18,31 @@ information, docs, and how to download the module for use, visit https://www.pyg
 This project will use PyGame to create a 2-dimensional representation of the pendulum system as a sort 
 of "visual simulation" of a chaotic or non-chaotic pendulum system.
 
-Getting Started...
+~~~ Getting Started ~~~
 Before doing anything, if you are running this on your own Windows machine, you will need to have a few 
 programs installed and added to your PATH.
-    1) g++ compiler (I used the one from mingw64)
-    2) Python - v3.12 preferred
-    3) Gnuplot - I used v5.4
-Here's a couple links in case you don't have these installed:
-https://www.mingw-w64.org/
-https://www.python.org/downloads/
-https://sourceforge.net/projects/gnuplot/files/gnuplot/
+    1) g++ compiler (https://www.mingw-w64.org/)
+    2) Python (https://www.python.org/downloads/) - v3.12 preferred
+    3) Gnuplot (https://sourceforge.net/projects/gnuplot/files/gnuplot/) - I used v5.4
 
-The C++ part of the program compiles and links using a Powershell script, since Make is primarily a 
-Linux-based application. The dependencies for the C++ segment reside within the aptly named "dependencies" 
-directory of the project workspace. It does a couple more things than JUST compile and link the needed .cpp 
-files, such as testing the Gnuplot functionality and retrieving the current working directory of the 
-project (for compiling and creating object files with absolute paths). The script also installs the required
-Python modules on your machine using a couple calls to pip. I understand that running this on Windows means 
-you need these various softwares, so hopefully you are comfortable with that.
+The project is divided into a few directories:
+
+VisualizingChaos  >>  script file, executables, README
+    \datafiles  >>  output files from C++ programs
+    \dependencies  >>  Makefile, .cpp and .h files
+    \misc  >>  object files (.o) and some other unimportant things
+    \python  >>  Python scripts (.py) for PyGame portion of the project
+
+~~~ Running the project ~~~
+The entire program runs off of a single script. I'm developing it primarily for Windows, so right now
+it runs with a Powershell (.ps1) script. See build.ps1 for details. To run, open up a Powershell terminal,
+navigate to the project directory (VisualizingChaos). Here you should see the build.ps1 script. At the command
+line, enter:
+> .\build.ps1
+then let the program do the work! The script will test Gnuplot by opening a window, compile and link the 
+C++ dependencies, then run the generated executable (diffeq_pendulum.exe), which in turn calls Gnuplot to
+plot in "real-time". You have the option to plot multiple times before exiting the C++ program, but note
+that each time you plot, the program overwrites the data file (.dat), so when Python takes over, it will
+only simulate your last run.
 
 
