@@ -137,8 +137,8 @@ repeat:
 
   if (plotParams.tmin >= plotParams.plot_min)
   {
-    out << plotParams.tmin << "  " << scientific << setprecision(15)
-        << y_rk4[0] << "  " << y_rk4[1] << endl;
+    out << plotParams.tmin << " " << scientific << setprecision(15)
+        << y_rk4[0] << " " << y_rk4[1] << endl;
     myPipe.plot(pendParams.theta0, pendParams.theta_dot0);  // plot 1st point
     myPipe.plot2(pendParams.theta0, pendParams.theta_dot0); // plot 1st point
   }

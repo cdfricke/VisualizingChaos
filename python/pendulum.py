@@ -39,4 +39,8 @@ xhat = pygame.Vector2(1, 0)
 yhat = pygame.Vector2(0, 1)
 # ************************************
 
-dataframe = read_csv(DATA_PATH + "gnupipe1.dat")
+# *** PARSE DATA FROM C++ ***
+colnames = ["t", "theta", "thetadot"]
+dataframe = read_csv(DATA_PATH + "diffeq_pendulum.dat", comment="#", sep=" ", names=colnames)
+print(dataframe)
+# ***************************
