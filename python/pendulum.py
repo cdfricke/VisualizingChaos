@@ -29,6 +29,7 @@ clock = pygame.time.Clock()
 dt = 0
 frame = 0
 simulationTime = 0
+RATE = 1
 # ******************
 
 # *** COMMON VECTORS AND LOCATIONS ***
@@ -44,3 +45,27 @@ colnames = ["t", "theta", "thetadot"]
 dataframe = read_csv(DATA_PATH + "diffeq_pendulum.dat", comment="#", sep=" ", names=colnames)
 print(dataframe)
 # ***************************
+
+# ***** GAME LOOP *****
+while running:
+    # pygame.QUIT means the user closed the window
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+    
+    # wipe away anything from the previous frame
+    screen.fill("black")
+
+    # ***** RENDER THE SIM HERE *****
+    
+
+    # flip() display to send work to the screen
+    pygame.display.flip()
+
+    # limit to 50 fps (dt ~ 0.02)
+    dt = clock.tick(100) / 1000
+    # track a couple things for use
+    simulationTime += dt * RATE
+    frame += 1
+
+pygame.quit()
