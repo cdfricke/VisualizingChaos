@@ -29,7 +29,7 @@ The project is divided into a few directories:
 
 VisualizingChaos  >>  script file, executables, README
     \datafiles  >>  output files from C++ programs
-    \dependencies  >>  Makefile, .cpp and .h files
+    \Cpp  >>  Makefile, .cpp and .h files
     \misc  >>  object files (.o) and some other unimportant things
     \python  >>  Python scripts (.py) for PyGame portion of the project
 

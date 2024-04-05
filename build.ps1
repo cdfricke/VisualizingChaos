@@ -20,11 +20,11 @@ Write-Output "Current Directory: $dir"
 # this includes diffeq_pendulum.cpp, diffeq_routines.cpp, GnuplotPipe.cpp
 Write-Output "Compiling and Linking C++ Program Dependencies..."
 # compile diffeq_pendulum
-g++ -c -g -Wall -O1 -o $dir\misc\diffeq_pendulum.o $dir\dependencies\diffeq_pendulum.cpp 
+g++ -c -g -Wall -O1 -o $dir\misc\diffeq_pendulum.o $dir\Cpp\diffeq_pendulum.cpp 
 # compile diffeq_routines
-g++ -c -g -Wall -O1 -o $dir\misc\diffeq_routines.o $dir\dependencies\diffeq_routines.cpp
+g++ -c -g -Wall -O1 -o $dir\misc\diffeq_routines.o $dir\Cpp\diffeq_routines.cpp
 # compile GnuplotPipe
-g++ -c -g -Wall -O1 -o $dir\misc\GnuplotPipe.o $dir\dependencies\GnuplotPipe.cpp
+g++ -c -g -Wall -O1 -o $dir\misc\GnuplotPipe.o $dir\Cpp\GnuplotPipe.cpp
 # link .o files to create an executable
 g++ -o diffeq_pendulum.exe $dir\misc\diffeq_pendulum.o $dir\misc\diffeq_routines.o $dir\misc\GnuplotPipe.o
 Write-Output "Compiling Stage Complete."
