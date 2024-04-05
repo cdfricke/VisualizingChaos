@@ -75,6 +75,7 @@ class Pendulum:
 # *** GRIDS, TRAILS, ASSETS ***
 grid = Grid(5, 5, WIDTH, HEIGHT)
 pendulum = Pendulum(radius=20, arm_length=250)
+motor = Pendulum(radius=12, arm_length=0)
 arrow = Arrow(center, pendulum.position)
 trail = Trail(15)
 
@@ -84,6 +85,7 @@ completion_text = Text()
 theta_text = Text()
 thetadot_text = Text()
 time_text = Text()
+motor_text = Text()
 
 # *** PARSE DATA FROM C++ ***
 colnames = ["t", "theta", "thetadot"]
@@ -116,7 +118,8 @@ while running:
         fps_text.text(f"FPS : {int(fps)}")
         time_text.text(f"Time (s) : {round(dataframe["t"][frame], 1)}")
         theta_text.text(f"Theta (radians) : {round(dataframe["theta"][frame],3)}")
-        thetadot_text.text(f"ThetaDot (radians/s) : {round(dataframe["thetadot"][frame],3)}")   
+        thetadot_text.text(f"ThetaDot (radians/s) : {round(dataframe["thetadot"][frame],3)}")  
+        motor_text.text("motor") 
         pendulum.update(dataframe["theta"][frame]) 
     else: 
         completion_text.text("Simulation complete!")
@@ -131,11 +134,13 @@ while running:
     trail.aadraw(screen, "green", 3)
     arrow.draw(screen, "grey", 5)
     pendulum.draw(screen, "red")
+    motor.draw(screen, "light grey")
     fps_text.render(screen, 20*xhat + 20*yhat)
     time_text.render(screen, 20*xhat + 35*yhat)
     theta_text.render(screen, 20*xhat + 50*yhat)
     thetadot_text.render(screen, 20*xhat + 65*yhat)
     completion_text.render(screen, 5*xhat + 5*yhat)
+    motor_text.render(screen, motor.position + 10*xhat - 20*yhat)
 
     pygame.display.flip() # flip() display to send work to the screen
 

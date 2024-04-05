@@ -12,9 +12,9 @@ $dir = Split-Path -Parent $scriptPath
 Write-Output "Current Directory: $dir"
 
 # TEST GNUPLOT FUNCTIONALITY
-Write-Output "Testing Gnuplot Connection... (opening window)"
-gnuplot --persist 'misc\\test.plt'
-Write-Output "Gnuplot Testing Stage Complete."
+#Write-Output "Testing Gnuplot Connection... (opening window)"
+#gnuplot --persist 'misc\\test.plt'
+#Write-Output "Gnuplot Testing Stage Complete."
 
 # compile and link dependencies of C++ programs
 # this includes diffeq_pendulum.cpp, diffeq_routines.cpp, GnuplotPipe.cpp

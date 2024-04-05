@@ -1,0 +1,15 @@
+# Programmer: Connor Fricke
+# File: example_params.dat
+# Latest Revision: 5-April-2024
+# Parameter Details for Pendulum systems with unique or interesting behavior.
+
+# Limit Cycle with fully rotating pendulum:
+f_ext = 0.52,
+w_ext = 0.694,
+theta_dot0 = 0.8
+
+# Chaotic Pendulum
+f_ext = 0.9,
+w_ext = 0.54,
+theta0 = -0.8,
+theta_dot0 = 0.1234
