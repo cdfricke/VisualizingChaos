@@ -39,10 +39,21 @@ it runs with a Powershell (.ps1) script. See build.ps1 for details. To run, open
 navigate to the project directory (VisualizingChaos). Here you should see the build.ps1 script. At the command
 line, enter:
 > .\build.ps1
-then let the program do the work! The script will test Gnuplot by opening a window, compile and link the 
-C++ dependencies, then run the generated executable (diffeq_pendulum.exe), which in turn calls Gnuplot to
-plot in "real-time". You have the option to plot multiple times before exiting the C++ program, but note
-that each time you plot, the program overwrites the data file (.dat), so when Python takes over, it will
-only simulate your last run.
+then let the program do the work! The script will compile and link the C++ dependencies, then run the generated
+executable (diffeq_pendulum.exe), which in turn calls Gnuplot to plot in "real-time". You have the option to 
+plot multiple times before exiting the C++ program, but note that each time you plot, the program overwrites 
+the data file (.dat), so when Python takes over, it will only simulate your last run. Also note that the Gnuplot
+window may be rather small on high resolution displays, so it's best to turn down your resolution to something like
+1080p (if possible on your machine), and then run the program.
+
+TODO:
+ - implement args to main() for automatically setting certain parameters, so we can call:
+    diffeq_pendulum.exe w_ext 0.5 f_ext 0.9 theta0 -0.8
+ - create files for input redirection purposes to the C++ program, with descriptive names (behavior of the pendulum).
+ - Add textbox class to python script so that large amounts of text can be rendered more easily.
+ - Add descriptive name of pendulum behavior somewhere in the simulation, e.g. ("Chaotic Pendulum")
+ - Add some pregenerated data files that won't be overwritten, and allow the user to select the datafile they want to
+   simulate.
+
 
 
