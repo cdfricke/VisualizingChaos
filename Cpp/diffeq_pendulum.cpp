@@ -91,13 +91,13 @@ int main(void)
   }
   else
   {
-    // might work, might not, shouldn't get to this case usually
-    GNUPLOT_TERMINAL = "qt";
-    CLEAR_CMD = "clear";
+    // shouldn't get here
+    cout << "Error, invalid OS. Terminating Program.\n";
+    return 0;
   }
 
   // *** INITIALIZE ***
-  const string FILENAME = "datafiles\\diffeq_pendulum.dat"; // filename for the output file
+  const string FILENAME = "datafiles/diffeq_pendulum.dat"; // filename for the output file
   GnuplotPipe myPipe;
 
   const int N = 2; // 2nd order equation --> 2 coupled 1st
@@ -179,7 +179,7 @@ repeat:
 
   out << endl;
   out.close(); // close the output file
-  cout << "\n results added to diffeq_pendulum.dat\n\n";
+  cout << "\n results added to datafiles/diffeq_pendulum.dat\n\n";
 }
   // allow the user to run the program again if they choose
   char AGAIN;

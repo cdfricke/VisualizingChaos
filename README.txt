@@ -5,6 +5,9 @@ C. Fricke (fricke.59@osu.edu)
 
 Latest Revision: 5-April-2024
 
+NOTE: This program cannot be run on OSC, because OSC uses Python 3.9 at the newest, and we cannot use the
+PyGame module which is necessary for the simulation.
+
 The final project will use some previously learned methods of solving dfferential equations in C++ to 
 solve the damped, driven pendulum oscillator differential equation. Then, the project will use PyGame 
 to create a 2D visual representation of the pendulum system and display the chaotic behavior as well as
@@ -46,10 +49,9 @@ the data file (.dat), so when Python takes over, it will only simulate your last
 window may be rather small on high resolution displays, so it's best to turn down your resolution to something like
 1080p (if possible on your machine), and then run the program.
 
-TODO:
+OPTIONAL TODO:
  - implement args to main() for automatically setting certain parameters, so we can call:
     diffeq_pendulum.exe w_ext 0.5 f_ext 0.9 theta0 -0.8
- - create files for input redirection purposes to the C++ program, with descriptive names (behavior of the pendulum).
  - Add textbox class to python script so that large amounts of text can be rendered more easily.
  - Add text to simulation that displays the pendulum parameters
  - Add descriptive name of pendulum behavior somewhere in the simulation, e.g. ("Chaotic Pendulum")

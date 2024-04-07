@@ -18,7 +18,7 @@ import os
 
 # *** GET PATHS, CHOOSE FILE ***
 PROJ_DIR = os.getcwd()
-DATA_PATH = PROJ_DIR + "\\datafiles\\"
+DATA_PATH = PROJ_DIR + "/datafiles/"
 selectFile = input("Select simulation to run:\n[1] Most Recent\n[2] Chaotic Example\n[3] Limit Cycles Example\n>> ")
 selectFile = int(selectFile) # convert to int
 match (selectFile):
@@ -27,7 +27,7 @@ match (selectFile):
     case 2:
         DATA_FILE = "chaotic.dat"
     case 3:
-        DATA_FILE = "limit_cycle.dat"
+        DATA_FILE = "limit_cycles.dat"
     case _:
         print("Using most recent C++ output.")
         DATA_FILE = "diffeq_pendulum.dat"
