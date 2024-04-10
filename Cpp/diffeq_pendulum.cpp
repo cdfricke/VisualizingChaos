@@ -108,79 +108,79 @@ int main(void)
   plot_parameters plotParams;     // parameters for Gnuplot behavior
   double h;                       // parameter for diffeq routine
 
-// START OF MENU FUNCTIONALITY
-repeat:
-{
-  // this function handles the menu prompting and assigning values entered by the user
-  queryParameters(pendParams, plotParams, h);
-
-  rhs_params_ptr = &pendParams; // load void pointer for rhs()
-
-  // *** PLOTTING STAGE ***
-  // set some properties of the Gnuplot Pipe
-  myPipe.set_terminal(GNUPLOT_TERMINAL + " title 'Gnuplot: Visualizing Chaos' size 720,720");
-  myPipe.set_title("Pendulum Phase Space");
-  myPipe.set_xlabel("theta");
-  myPipe.set_ylabel("theta dot");
-  myPipe.set_delay(1000 * plotParams.plot_delay); // set_delay in usec
-  cout << "Plotting now (wait until complete) . . ." << endl;
-
-  // open the output file
-  ofstream out; // declare the output file
-  out.open(FILENAME, ofstream::trunc);
-
-  myPipe.init(); // start up piping to gnuplot
-
-  y_rk4[0] = pendParams.theta0;     // initial condition for y0(t)
-  y_rk4[1] = pendParams.theta_dot0; // initial condition for y1(t)
-
-  // print out the parameters, a header, and the first set of points
-  out << "# omega0=" << pendParams.omega0 << ", alpha=" << pendParams.alpha << endl;
-  out << "# theta0=" << pendParams.theta0 << ", theta_dot0=" << pendParams.theta_dot0 << endl;
-  out << "# t_start=" << plotParams.tmin << ", t_end=" << plotParams.tmax << ", h="
-      << h << endl;
-  out << "#   t          theta(t)                 thetadot(t)       " << endl;
-
-  if (plotParams.tmin >= plotParams.plot_min)
+  // START OF MENU FUNCTIONALITY
+  repeat:
   {
-    out << plotParams.tmin << " " << scientific << setprecision(15)
-        << y_rk4[0] << " " << y_rk4[1] << endl;
-    myPipe.plot(pendParams.theta0, pendParams.theta_dot0);  // plot 1st point
-    myPipe.plot2(pendParams.theta0, pendParams.theta_dot0); // plot 1st point
-  }
+    // this function handles the menu prompting and assigning values entered by the user
+    queryParameters(pendParams, plotParams, h);
 
-  int point_count = 0; // initialize point counter
-  for (double t = plotParams.tmin; t <= plotParams.tmax; t += h)
-  {
-    // find y(t+h) by a 4th order Runge-Kutta step
-    runge4(N, t, y_rk4, h, rhs, rhs_params_ptr);
+    rhs_params_ptr = &pendParams; // load void pointer for rhs()
 
-    if ((t >= plotParams.plot_min) & (t <= plotParams.plot_max))
+    // *** PLOTTING STAGE ***
+    // set some properties of the Gnuplot Pipe
+    myPipe.set_terminal(GNUPLOT_TERMINAL + " title 'Gnuplot: Visualizing Chaos' size 720,720");
+    myPipe.set_title("Pendulum Phase Space");
+    myPipe.set_xlabel("theta");
+    myPipe.set_ylabel("theta dot");
+    myPipe.set_delay(1000 * plotParams.plot_delay); // set_delay in usec
+    cout << "Plotting now (wait until complete) . . ." << endl;
+
+    // open the output file
+    ofstream out; // declare the output file
+    out.open(FILENAME, ofstream::trunc);
+
+    myPipe.init(); // start up piping to gnuplot
+
+    y_rk4[0] = pendParams.theta0;     // initial condition for y0(t)
+    y_rk4[1] = pendParams.theta_dot0; // initial condition for y1(t)
+
+    // print out the parameters, a header, and the first set of points
+    out << "# omega0=" << pendParams.omega0 << ", alpha=" << pendParams.alpha << endl;
+    out << "# theta0=" << pendParams.theta0 << ", theta_dot0=" << pendParams.theta_dot0 << endl;
+    out << "# t_start=" << plotParams.tmin << ", t_end=" << plotParams.tmax << ", h="
+        << h << endl;
+    out << "#   t          theta(t)                 thetadot(t)       " << endl;
+
+    if (plotParams.tmin >= plotParams.plot_min)
     {
-      point_count++; // increment point counter
-
-      double theta = y_rk4[0];     // current angle
-      double theta_dot = y_rk4[1]; // current angular velocity
-
-      if ((point_count % plotParams.plot_skip) == 0)
-      { // plot every plot_skip points
-        out << t + h << " " << scientific << setprecision(15)
-            << theta << " " << theta_dot << endl;
-        // send points to gnuplot
-        myPipe.plot(theta, theta_dot);
-      }
-      if ((point_count % plotParams.T_skip) == 0)
-      { // plot every T_skip points
-        // send points to gnuplot
-        myPipe.plot2(theta, theta_dot);
-      }
+      out << plotParams.tmin << " " << scientific << setprecision(15)
+          << y_rk4[0] << " " << y_rk4[1] << endl;
+      myPipe.plot(pendParams.theta0, pendParams.theta_dot0);  // plot 1st point
+      myPipe.plot2(pendParams.theta0, pendParams.theta_dot0); // plot 1st point
     }
-  } // end for loop over t
 
-  out << endl;
-  out.close(); // close the output file
-  cout << "\n results added to datafiles/diffeq_pendulum.dat\n\n";
-}
+    int point_count = 0; // initialize point counter
+    for (double t = plotParams.tmin; t <= plotParams.tmax; t += h)
+    {
+      // find y(t+h) by a 4th order Runge-Kutta step
+      runge4(N, t, y_rk4, h, rhs, rhs_params_ptr);
+
+      if ((t >= plotParams.plot_min) & (t <= plotParams.plot_max))
+      {
+        point_count++; // increment point counter
+
+        double theta = y_rk4[0];     // current angle
+        double theta_dot = y_rk4[1]; // current angular velocity
+
+        if ((point_count % plotParams.plot_skip) == 0)
+        { // plot every plot_skip points
+          out << t + h << " " << scientific << setprecision(15)
+              << theta << " " << theta_dot << endl;
+          // send points to gnuplot
+          myPipe.plot(theta, theta_dot);
+        }
+        if ((point_count % plotParams.T_skip) == 0)
+        { // plot every T_skip points
+          // send points to gnuplot
+          myPipe.plot2(theta, theta_dot);
+        }
+      }
+    } // end for loop over t
+
+    out << endl;
+    out.close(); // close the output file
+    cout << "\n results added to datafiles/diffeq_pendulum.dat\n\n";
+  }
   // allow the user to run the program again if they choose
   char AGAIN;
   cout << "Again? Y/N\n>> ";
@@ -250,7 +250,11 @@ void queryParameters(pendulum_parameters &pendParams, plot_parameters &plotParam
   int answer = 1;     // answer to parameter queries
   while (answer != 0) // iterate until told to move on
   {
-    system(CLEAR_CMD.c_str());  // clear terminal before showing menu
+    int CLEARED = system(CLEAR_CMD.c_str());  // clear terminal before showing menu
+    if (!CLEARED)
+    {
+      cout << "Error using clear command.\n";
+    }
     // MENU OPTIONS:
     cout << "\nCurrent parameters:\n";
     cout << "[1] omega0 = " << pendParams.omega0 << endl;

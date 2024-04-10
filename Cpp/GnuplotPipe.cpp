@@ -28,7 +28,10 @@
 #include <sstream>
 #include <stdlib.h>
 #include <unistd.h>
-using std::ostringstream;
+#include <filesystem>
+#include <string>
+#include <iostream>
+using std::ostringstream, std::string, std::cout;
 
 #include "GnuplotPipe.h"
 
@@ -37,7 +40,6 @@ using std::ostringstream;
 // Constructor for GnuplotPipe (add more)
 GnuplotPipe::GnuplotPipe ( )
 {
-
   // Set defaults for filehandles and file names 
   gp_cmd = 0;
   fileout = 0;

@@ -21,16 +21,16 @@ PROJ_DIR = os.getcwd()
 DATA_PATH = PROJ_DIR + "/datafiles/"
 selectFile = input("Select simulation to run:\n[1] Most Recent\n[2] Chaotic Example\n[3] Limit Cycles Example\n>> ")
 selectFile = int(selectFile) # convert to int
-match (selectFile):
-    case 1:
-        DATA_FILE = "diffeq_pendulum.dat"
-    case 2:
-        DATA_FILE = "chaotic.dat"
-    case 3:
-        DATA_FILE = "limit_cycles.dat"
-    case _:
-        print("Using most recent C++ output.")
-        DATA_FILE = "diffeq_pendulum.dat"
+
+if (selectFile == 1):
+    DATA_FILE = "diffeq_pendulum.dat"
+elif (selectFile == 2):
+    DATA_FILE = "chaotic.dat"
+elif (selectFile == 3):
+    DATA_FILE = "limit_cycles.dat"
+else:
+    print("Using most recent C++ output.")
+    DATA_FILE = "diffeq_pendulum.dat"
 # *****************
 
 # *** INITIALIZE ***
@@ -127,10 +127,10 @@ while running:
     if (SIM_RUNNING):
         # update all text to display values on screen
         completion_text.text("Simulation Running...")
-        fps_text.text(f"FPS : {int(fps)}")
-        time_text.text(f"Time (s) : {round(dataframe["t"][frame], 1)}")
-        theta_text.text(f"Theta (radians) : {round(dataframe["theta"][frame],3)}")
-        thetadot_text.text(f"ThetaDot (radians/s) : {round(dataframe["thetadot"][frame],3)}")  
+        fps_text.text( "FPS :" + str( int(fps) ) )
+        time_text.text( "Time (s) :" + str( round(dataframe["t"][frame], 1) ) )
+        theta_text.text( "Theta (radians) :" + str(round(dataframe["theta"][frame],3) ) )
+        thetadot_text.text( "ThetaDot (radians/s) :" + str( round(dataframe["thetadot"][frame],3) ) )  
         motor_text.text("motor") 
         pendulum.update(dataframe["theta"][frame]) 
     else: 
