@@ -251,7 +251,7 @@ void queryParameters(pendulum_parameters &pendParams, plot_parameters &plotParam
   while (answer != 0) // iterate until told to move on
   {
     int CLEARED = system(CLEAR_CMD.c_str());  // clear terminal before showing menu
-    if (!CLEARED)
+    if (CLEARED)
     {
       cout << "Error using clear command.\n";
     }

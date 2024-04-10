@@ -31,7 +31,7 @@
 #include <filesystem>
 #include <string>
 #include <iostream>
-using std::ostringstream, std::string, std::cout;
+using std::ostringstream, std::string, std::cout, std::endl;
 
 #include "GnuplotPipe.h"
 
@@ -88,6 +88,11 @@ GnuplotPipe::init ( )
   
   fileout = fopen (filename.c_str(), "w");
   fileout2 = fopen (filename2.c_str(), "w");
+  if ( (!fileout) || (!fileout2) )
+  {
+    cout << "Files could not be opened." << endl;
+    return (2);
+  }
 
   gnuplot_cmd ("set terminal " + terminal);
 
@@ -197,8 +202,10 @@ int
 GnuplotPipe::finish ()
 {
   pclose (gp_cmd);  // close a gnuplot handle
-  fclose (fileout);  // close the first data file
-  fclose (fileout2);  // close the second data file 
+  if (fileout)
+    fclose (fileout);  // close the first data file
+  if (fileout2)
+    fclose (fileout2);  // close the second data file 
 
   return (0);
 }

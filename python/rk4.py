@@ -140,13 +140,13 @@ for t in arange(TMIN, TMAX, h):
     # run algorithm to get value at next step
     runge4(N, t, y_rk4, h)
 
+    # increment point count
+    point_count += 1
+    
     # get theta and theta_dot
     theta = y_rk4[0]
     theta_dot = y_rk4[1]
     # plot (save to file) every PLOT_SKIP'th point
     if (point_count % PLOT_SKIP == 0):
         out.write(str(t+h) + " " + str(theta) + " " + str(theta_dot) + "\n")
-
-    # increment point count
-    point_count += 1
 # ******* END *********

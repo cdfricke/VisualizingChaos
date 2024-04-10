@@ -44,6 +44,10 @@ Write-Output "Installing Python Modules: PyGame, Matplotlib"
 python.exe -m pip install PyGame Matplotlib > $dir/misc/null
 Write-Output "Module Install Stage Complete."
 
+# Generate validation data file from rk4.py script
+python.exe ./python/rk4.py
+Write-Output "Wrote data from rk4.py to python_results.dat"
+
 # run python script!
 $userInput = Read-Host -Prompt "Start Python simulation? Y/N"
 while ($userInput -eq "Y") {

@@ -7,6 +7,7 @@ Latest Revision: 5-April-2024
 
 NOTE: This program cannot be run on OSC, because OSC uses Python 3.9 at the newest, and we cannot use the
 PyGame module which is necessary for the simulation.
+NOTE: You must run all scripts and executables from the project directory.
 
 The final project will use some previously learned methods of solving dfferential equations in C++ to 
 solve the damped, driven pendulum oscillator differential equation. Then, the project will use PyGame 
@@ -30,7 +31,7 @@ programs installed and added to your PATH.
 
 The project is divided into a few directories:
 
-VisualizingChaos  >>  script file, executables, README
+VisualizingChaos  >>  powershell script file, executable, README
     \datafiles  >>  output files from C++ programs
     \Cpp  >>  Makefile, .cpp and .h files
     \misc  >>  object files (.o) and some other unimportant things
@@ -50,11 +51,10 @@ window may be rather small on high resolution displays, so it's best to turn dow
 1080p (if possible on your machine), and then run the program.
 
 OPTIONAL TODO:
- - implement args to main() for automatically setting certain parameters, so we can call:
-    diffeq_pendulum.exe w_ext 0.5 f_ext 0.9 theta0 -0.8
  - Add textbox class to python script so that large amounts of text can be rendered more easily.
- - Add text to simulation that displays the pendulum parameters
- - Add descriptive name of pendulum behavior somewhere in the simulation, e.g. ("Chaotic Pendulum")
+ - Add text to simulation that displays the pendulum parameters (omega0, w_ext, f_ext, etc.)
+ - Add in validation that compares the absolute error every n'th time step between the two data files
+   generated from C++ RK4 and Python RK4
 
 
 
