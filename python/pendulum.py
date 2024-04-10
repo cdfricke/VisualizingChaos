@@ -19,7 +19,7 @@ import os
 # *** GET PATHS, CHOOSE FILE ***
 PROJ_DIR = os.getcwd()
 DATA_PATH = PROJ_DIR + "/datafiles/"
-selectFile = input("Select simulation to run:\n[1] Most Recent\n[2] Chaotic Example\n[3] Limit Cycles Example\n>> ")
+selectFile = input("Select simulation to run:\n[1] Most Recent\n[2] Chaotic Example\n[3] Limit Cycles Example\n[4] Other\n>> ")
 selectFile = int(selectFile) # convert to int
 
 if (selectFile == 1):
@@ -28,6 +28,8 @@ elif (selectFile == 2):
     DATA_FILE = "chaotic.dat"
 elif (selectFile == 3):
     DATA_FILE = "limit_cycles.dat"
+elif (selectFile == 4):
+    DATA_FILE = input("Enter file name (in /datafiles directory) >> ")
 else:
     print("Using most recent C++ output.")
     DATA_FILE = "diffeq_pendulum.dat"
