@@ -27,12 +27,12 @@
 //******************************************************************
 // include files
 #define _USE_MATH_DEFINES // for M_PI definition
-#include <iostream>       // note that .h is omitted
-#include <iomanip>        // note that .h is omitted
-#include <fstream>        // note that .h is omitted
+#include <iostream>
+#include <iomanip>        
+#include <fstream>        
 #include <string>
 #include <cstdlib>
-using namespace std; // we need this when .h is omitted
+using namespace std; 
 #include <cmath>
 #include "diffeq_routines.h" // diffeq routine prototypes
 #include "GnuplotPipe.h"     // direct piping
@@ -93,7 +93,7 @@ int main(void)
   {
     // shouldn't get here
     cout << "Error, invalid OS. Terminating Program.\n";
-    return 0;
+    return EXIT_FAILURE;
   }
 
   // *** INITIALIZE ***
@@ -192,7 +192,7 @@ int main(void)
   myPipe.finish(); // close the pipe to gnuplot
   cout << "Complete." << endl;
 
-  return (0); // successful completion!
+  return EXIT_SUCCESS; // successful completion!
 }
 
 //*************************** rhs ***************************

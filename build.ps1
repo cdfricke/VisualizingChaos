@@ -11,11 +11,6 @@ $scriptPath = $MyInvocation.MyCommand.path
 $dir = Split-Path -Parent $scriptPath
 Write-Output "Current Directory: $dir"
 
-# TEST GNUPLOT FUNCTIONALITY
-Write-Output "Testing Gnuplot Connection... (opening window)"
-gnuplot --persist 'misc/test.plt'
-Write-Output "Gnuplot Testing Stage Complete."
-
 # compile and link dependencies of C++ programs
 # this includes diffeq_pendulum.cpp, diffeq_routines.cpp, GnuplotPipe.cpp
 Write-Output "Compiling and Linking C++ Program Dependencies..."
@@ -47,6 +42,8 @@ Write-Output "Module Install Stage Complete."
 # Generate validation data file from rk4.py script
 python.exe ./python/rk4.py
 Write-Output "Wrote data from rk4.py to python_results.dat"
+Write-Output "Validating C++ Results with Python results: Limit Cycles Parameters"
+python.exe ./python/validation.py
 
 # run python script!
 $userInput = Read-Host -Prompt "Start Python simulation? Y/N"
