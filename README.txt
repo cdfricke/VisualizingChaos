@@ -53,8 +53,6 @@ window may be rather small on high resolution displays, so it's best to turn dow
 OPTIONAL TODO:
  - Add textbox class to python script so that large amounts of text can be rendered more easily.
  - Add text to simulation that displays the pendulum parameters (omega0, w_ext, f_ext, etc.)
- - Add in validation that compares the absolute error every n'th time step between the two data files
-   generated from C++ RK4 and Python RK4
 
 
 
